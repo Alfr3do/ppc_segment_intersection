@@ -1,0 +1,24 @@
+/*
+ * 
+ */
+program Logic_multipair {
+    const inp_size = 4;
+    type Elem = Int<16>; // 16-bit integer
+	type AliceInput = Elem[inp_size];
+	type BobInput = Elem[inp_size];
+	type AliceOutput = Boolean; 
+	type BobOutput = Boolean;
+	type Output = struct {AliceOutput alice,
+            BobOutput bob};
+	type Input = struct {AliceInput alice,
+            BobInput bob};
+
+	function Output output(Input input) {
+        output.alice = 
+        (((input.alice[0] >=  input.bob[0]) & (input.alice[1] <=  input.bob[1]) & (input.alice[2] >=  input.bob[2]) & (input.alice[3] <=  input.bob[3])) | ((input.alice[0] >=  input.bob[0]) & (input.alice[1] <=  input.bob[1]) & (input.alice[2] <=  input.bob[2]) & (input.alice[3] >=  input.bob[3])) | ((input.alice[0] <=  input.bob[0]) & (input.alice[1] >=  input.bob[1]) & (input.alice[2] >=  input.bob[2]) & (input.alice[3] <=  input.bob[3])) | ((input.alice[0] <=  input.bob[0]) & (input.alice[1] >=  input.bob[1]) & (input.alice[2] <=  input.bob[2]) & (input.alice[3] >=  input.bob[3])));
+        
+        output.bob = output.alice;
+      
+	}
+
+}

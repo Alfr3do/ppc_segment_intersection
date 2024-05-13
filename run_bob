@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Parent dir's full path
+PARENT_PATH=`echo $PWD | sed 's/\/[^\/]*$//'`
+
+CURRENT_DIR=`dirname $0`
+cd ${CURRENT_DIR}
+
+if [ -n "${JAVA_HOME}" ]; then
+	JAVA=${JAVA_HOME}/bin/java
+else
+	JAVA=java
+fi
+
+# Windows separation is semicolon, unix-based SO use colon
+#CLASSPATH='../jars/SFE.jar;../jars/log4j-1.2beta3.jar'
+CLASSPATH='./jars/SFE.jar:./jars/log4j-1.2beta3.jar'
+RUNDIR_ARG=-Drundir=${CURRENT_DIR}/
+
+#"${JAVA}" -Xmx7g -XX:-UseGCOverheadLimit -classpath ${CLASSPATH} ${RUNDIR_ARG} SFE.BOAL.Bob $*
+"${JAVA}" -Xmx7g -XX:-UseGCOverheadLimit -cp ${CLASSPATH} ${RUNDIR_ARG} SFE.BOAL.Bob $*
