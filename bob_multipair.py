@@ -124,6 +124,7 @@ def intersection_decision(bob_edges):
         bs = connection.recv(8)
         (length,) = unpack('>Q', bs)
         data = b''
+        print(str(length)+" bytes to be received + 8 bytes")
         while len(data) < length:
             to_read = length - len(data)
             data += connection.recv(4096 if to_read > 4096 else to_read)
@@ -138,6 +139,7 @@ def intersection_decision(bob_edges):
 
         bs = connection.recv(8)
         (length,) = unpack('>Q', bs)
+        print(str(length)+" bytes to be received + 8")
         data = b''
         while len(data) < length:
             to_read = length - len(data)
@@ -159,6 +161,8 @@ def intersection_decision(bob_edges):
         length = pack('>Q', len(data_d_r_matrix))
         connection.sendall(length)
         connection.sendall(data_d_r_matrix)
+
+        print("1 byte to be received")
 
         ack = connection.recv(1)
         #print("@@@@@@@@@@@@@@@@@@@@@@@@" + str(ack))
@@ -183,6 +187,8 @@ def intersection_decision(bob_edges):
             connection.sendall(message)
 
             # receive the circuit launch confirmation from Alice
+            # this can be just 1 byte
+            print("10240 bytes to be received")
             data_message = connection.recv(10240)
             print('Alice started the circuit ')#.format(data_message))
 

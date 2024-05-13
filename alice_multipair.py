@@ -89,6 +89,7 @@ def intersection_decision(alice_edges):
         #print('sending ')#.format(data_encrypted_param))
         sock.sendall(data_encrypted_param)
 
+        print("1 bytes to be received ")
         ack = sock.recv(1)
         #print("@@@@@@@@@@@@@@@@@@@@@@@@" + str(ack))
 
@@ -99,12 +100,14 @@ def intersection_decision(alice_edges):
         #print('sending ')#.format(data_ha_matrix))
         sock.sendall(data_ha_matrix)
 
+        print("1 bytes to be received")
         ack = sock.recv(1)
         #print("@@@@@@@@@@@@@@@@@@@@@@@@" + str(ack))
 
         # get d_r_1 ... d_r_4 (matrix) from Bob:
         bs = sock.recv(8)
         (length,) = unpack('>Q', bs)
+        print(str(length)+" bytes to be received + 8 bytes")
         data = b''
         while len(data) < length:
             to_read = length - len(data)
@@ -130,7 +133,9 @@ def intersection_decision(alice_edges):
         # circuit invoke goes here:
         for m in range(0, len(d_r_matrix)):
             print('wating for Bob launch the circuit ...')
-            # wait confirmation from Bob (Bob launched the circuit)
+            # wait confirmation from Bob (Bob launched the circuit)            
+            # this can be just 1 byte
+            print("10240 bytes to be received ")
             data_message = sock.recv(10240)
             print('received ')#.format(data_message))
 
